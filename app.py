@@ -1,6 +1,6 @@
 from flask import Flask, request
-from botnoi import scrape as sc
-from botnoi import cv
+import tensorflow as tf
+import requests
 import joblib
 import numpy 
 
@@ -13,10 +13,16 @@ def home():
 @app.route('/prediction')
 def classifier():
     img_url = request.values['img_url']
-    features = cv.image(img_url)
-    features = features.getresnet50()
-    model = joblib.load('img_cls.pkl')
-    prediction = model.predict([features])
+    img = tf.image.decode_jpeg(requests.get(img_url).content, channels=3, name="jpeg_reader")
+    resized_img = tf.image.resize(img, (224,224))
+    image = tf.expand_dims(resized_img, axis=0)
+    model = tf.keras.applications.ResNet50(include_top=False,
+                                                      weights='imagenet')
+    features = model(image).numpy()
+    flat_features = features.flatten()
+
+    model = joblib.load('model.pkl')
+    prediction = model.predict([flat_features])
     result = {'img_url': img_url, 'prediction': prediction[0]}
     return result
 
