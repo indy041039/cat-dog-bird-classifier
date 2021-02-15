@@ -20,6 +20,7 @@ def classifier():
     result = {'img_url': img_url, 'prediction': prediction[0]}
     return result
 
+
 if __name__=='__main__':
     app.run(debug=True)
 
