@@ -16,8 +16,7 @@ def classifier():
     img = tf.image.decode_jpeg(requests.get(img_url).content, channels=3, name="jpeg_reader")
     resized_img = tf.image.resize(img, (224,224))
     image = tf.expand_dims(resized_img, axis=0)
-    model = tf.keras.applications.ResNet50(include_top=False,
-                                                      weights='imagenet')
+    model = tf.keras.applications.ResNet50(include_top=False, weights='imagenet')
     features = model(image).numpy()
     flat_features = features.flatten()
 
