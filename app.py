@@ -20,7 +20,7 @@ def classifier():
     image_bytes = io.BytesIO(response.content)
     img = PIL.Image.open(image_bytes)
     img = np.array(img)
-    #Resize image into 224x224x3
+    #Resize image into 224 x 224 x 3
     resized_img = tf.image.resize(img, (224,224))
     image = tf.expand_dims(resized_img, axis=0)
     model = tf.keras.applications.ResNet50(include_top=False, weights='imagenet')
