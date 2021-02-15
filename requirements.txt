@@ -5,3 +5,4 @@ numpy==1.19.5
 gunicorn
 keras
 scikit-learn==0.24.1
+oauth2client
