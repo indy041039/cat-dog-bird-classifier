@@ -15,7 +15,7 @@ def home():
 
 @app.route('/prediction')
 def classifier():
-    img_url = request.values['img_url']
+    img_url = request.values['p_image_url']
     #Convert image to numpy array
     # response = requests.get(img_url)
     # image_bytes = io.BytesIO(response.content)
