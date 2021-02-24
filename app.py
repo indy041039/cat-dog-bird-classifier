@@ -1,11 +1,8 @@
 from flask import Flask, request, jsonify
 from botnoi import cv
-import tensorflow as tf
 import requests
 import joblib
 import numpy as np
-import io
-import PIL
 
 app = Flask(__name__)
 
@@ -19,6 +16,7 @@ def classifier():
     a = cv.image(img_url)
     feat = a.getmobilenet()
     model = joblib.load('model_mobilenet.pkl')
+    
     #Predict classes with LinearSVC
     prediction = model.predict([feat])
     print(feat.shape)
