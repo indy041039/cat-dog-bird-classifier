@@ -19,7 +19,6 @@ def classifier():
     
     #Predict classes with LinearSVC
     prediction = model.predict([feat])
-    print(feat.shape)
     result = {'img_url': img_url, 'prediction': prediction[0]}
     return jsonify(result)
 
