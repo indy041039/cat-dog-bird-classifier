@@ -29,10 +29,11 @@ def classifier():
     # features = model(image).numpy()
     # flat_features = features.flatten()
     a = cv.image(img_url)
-    feat = a.getresnet50()
-    model = joblib.load('model.pkl')
+    feat = a.getmobilenet()
+    model = joblib.load('model_mobilenet.pkl')
     #Predict classes with LinearSVC
     prediction = model.predict([feat])
+    print(feat.shape)
     result = {'img_url': img_url, 'prediction': prediction[0]}
     return jsonify(result)
 
